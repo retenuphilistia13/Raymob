@@ -23,9 +23,9 @@ using std::cout;
 using std::endl;
 
 //todo make it in seperate class (helper function)
-extern const int screenWidth;
-extern const int screenHeight;
-
+//extern const int screenWidth;
+//extern const int screenHeight;
+//
 
 class CardManager {
 public:

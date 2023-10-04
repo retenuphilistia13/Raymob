@@ -31,7 +31,7 @@ cardSize=card;
 
     float maxScale = static_cast<float>(GetScreenWidth()) / (static_cast<float>(cardSize) * texture.width);//if portrait
 //  float maxScale = static_cast<float>(screenHeight) / (static_cast<float>(cardSize) * texture.width);//if landscape
-float maxScaleY = static_cast<float>(screenHeight) / (static_cast<float>(cardSize) * texture.height*0.77f);
+float maxScaleY = static_cast<float>(GetScreenHeight()) / (static_cast<float>(cardSize) * texture.height*0.77f);
 
     float scale = std::min(maxScale, 0.6f); // Ensure scale is not greater than 1
     float scaleY = std::min(maxScaleY, 0.5f); // Ensure scale is not greater than 1
@@ -90,7 +90,7 @@ float maxScaleY = static_cast<float>(screenHeight) / (static_cast<float>(cardSiz
     std::cout<<"totalWidth"<<totalWidth<<std::endl;
     	        shuffleVector(cards);
 
-	        shuffleVector(cards);
+//	        shuffleVector(cards);
 
 
 }

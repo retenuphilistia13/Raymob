@@ -22,17 +22,15 @@ using std::string;
 using std::cout;
 using std::endl;
 
-const int screenWidth = 720;
-const int screenHeight = 1000;
-
 bool win;
 
 int main(int argc, char **argv) {
 	  // Initialization
 
 	    InitWindow(0, 0, "meomary card");
-	    SetWindowSize(screenWidth, screenHeight);
-int level=1;
+	    SetWindowSize(GetScreenWidth(), GetScreenHeight());
+
+int level=2;
 	    CardManager* cardGame=new CardManager(level);
 
 	    SetTargetFPS(60);
