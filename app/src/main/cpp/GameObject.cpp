@@ -9,7 +9,8 @@
 
 GameObject::GameObject() {
 	// TODO Auto-generated constructor stub
-	deltaTime=GetFrameTime();
+	deltaTime=GetFrameTime();//first assigning delta Time
+	
 }
 
 GameObject::~GameObject() {

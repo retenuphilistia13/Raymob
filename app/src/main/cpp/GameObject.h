@@ -16,6 +16,9 @@ private:
 	float deltaTime;
 public:
 		bool isClicked;
+
+		bool isVisible=true;
+
 float getDeltaTime(){
 	return deltaTime;
 }

@@ -46,6 +46,7 @@ Vector2 mousePosition= GetMousePosition();
 
 if(CheckCollisionPointRec(mousePosition,destRect)){
 	isClicked=true;
+
 }
 //detect android input
 if (IsGestureDetected(GESTURE_TAP)) {
@@ -75,9 +76,10 @@ if (IsGestureDetected(GESTURE_TAP)) {
 	}
 
 	void Ballon::draw(){
-if(!isClicked)
+if(isVisible)
 		DrawTexturePro(texture, sourceRect, destRect, Vector2{0, 0}, 0.0f, WHITE);
 		else if(isClicked){
+
 			cout<<"clicked";
 		}
 	}

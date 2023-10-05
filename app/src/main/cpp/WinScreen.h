@@ -21,43 +21,52 @@ std::vector<Ballon*> ballons;
 
 public:
 WinScreen(){
+    InitAudioDevice();      // Initialize audio device
 
-
+    popSound = LoadSound("pop_ballon.wav");         // Load WAV audio file
+yeaySound=LoadSound("yeay.mp3");
+PlaySound(yeaySound);
 }
+ Sound popSound ;
+  Sound yeaySound ;
 bool isActivate=false;
 Timer winScreen;
 
-int ballonNumber=130;
+int ballonNumber=150;
 void creatBallon(){
 	float x=10;
-
 
 std::random_device rd;
 std::mt19937 gen(rd());
 
-int randomW= GetScreenWidth();
-int randomH=GetScreenHeight()*4;
+int randomW= GetScreenWidth()-120;
+int randomH=GetScreenHeight()*6;
 int randomC=1;//color
-int maxSpeed=350;
+int maxSpeed=220;
 int minSpeed=130;
 
 // ballons.clear();//important to not cause
 for(int i=0;i<ballonNumber;i++){
 
     std::uniform_int_distribution<int> distPosX(0, randomW);
-    std::uniform_int_distribution<int> distPosY(GetScreenHeight()/2, randomH);
+    std::uniform_int_distribution<int> distPosY(0, randomH);
     std::uniform_int_distribution<int> distColor(0, randomC);
     std::uniform_int_distribution<int> distSpeed(minSpeed, maxSpeed);
 
-    int w = distPosX(gen);
-    int h = distPosY(gen);
+    int x = distPosX(gen);
+    int y = distPosY(gen);
     int c=distColor(gen);
     int speed=distSpeed(gen);
 
-	Rectangle rec= {(float)w,(float)(h),100.0f,100.0f};
+	Rectangle rec= {(float)x,(float)(y),0,0};
 
 	ballons.push_back(new Ballon(rec));
 	ballons[i]->setTexture(ballons[i]->color[c]);
+
+	ballons[i]->size.x=ballons[i]->texture.width;
+	ballons[i]->size.y=ballons[i]->texture.height;
+
+	ballons[i]->updateSize();
 
 	ballons[i]->setSpeed(speed);
 
@@ -105,6 +114,13 @@ void show(){
 for(int i=0;i<ballons.size();i++){
 ballons[i]->update();
 ballons[i]->draw();
+
+if(ballons[i]->isClicked&&ballons[i]->isVisible){
+PlaySound(popSound);
+ballons[i]->isVisible=false;//make them unvisible after sound pop activate
+}
+
+
 }
 
 winScreen.UpdateTimer();
@@ -113,7 +129,10 @@ winScreen.UpdateTimer();
 }
 
 void clearScreen(){
+    UnloadSound(popSound);     // Unload sound data
 
+ UnloadSound(yeaySound);
+    CloseAudioDevice();     // Close audio device
     for(int i=0;i<ballons.size();i++){
 		delete ballons[i];
 	}
