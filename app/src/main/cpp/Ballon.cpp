@@ -41,31 +41,6 @@ void Ballon::setSpeed(float speed1){
 }
 	void Ballon::update(){
 
-if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
-Vector2 mousePosition= GetMousePosition();
-
-if(CheckCollisionPointRec(mousePosition,destRect)){
-	isClicked=true;
-
-}
-//detect android input
-if (IsGestureDetected(GESTURE_TAP)) {
-      Vector2 touchPosition = GetTouchPosition(0); // Get the position of the first touch (assuming single touch)
-
-      if (CheckCollisionPointRec(touchPosition, destRect)) {
-          isClicked = true;
-
-
-      }
-  }
-   }
-
-
-
-
-
-
-
 
 		position.y-=speed*getDeltaTime();
 
@@ -78,7 +53,7 @@ if (IsGestureDetected(GESTURE_TAP)) {
 	void Ballon::draw(){
 if(isVisible)
 		DrawTexturePro(texture, sourceRect, destRect, Vector2{0, 0}, 0.0f, WHITE);
-		else if(isClicked){
+		else if(!isVisible){
 
 			cout<<"clicked";
 		}

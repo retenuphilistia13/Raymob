@@ -73,8 +73,50 @@ for(int i=0;i<ballonNumber;i++){
 }
 }
 
-
 void update(){
+
+int index=-1;
+
+
+
+for(int i=0;i<ballons.size();i++){
+ballons[i]->update();
+
+//if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
+//Vector2 mousePosition= GetMousePosition();
+//
+//if(CheckCollisionPointRec(mousePosition,ballons[i]->destRect)){
+//	ballons[i]->isClicked=true;
+//
+//}
+//}
+//detect android input
+
+if (IsGestureDetected(GESTURE_TAP)) {
+      Vector2 touchPosition = GetTouchPosition(0); // Get the position of the first touch (assuming single touch)
+
+      if (CheckCollisionPointRec(touchPosition, ballons[i]->destRect)&&ballons[i]->isVisible) {
+//          ballons[i]->isClicked = true;
+index=i;
+
+      }
+  }
+
+//if(ballons[i]->isClicked&&ballons[i]->isVisible){
+//index=i;
+//}
+
+
+   }//end loop
+
+if(index!=-1){
+ballons[index]->isClicked = true;
+ballons[index]->isVisible=false;
+
+PlaySound(popSound);
+
+}
+
 
 
 }
@@ -110,16 +152,10 @@ bool isWinDone(){
 }
 
 void show(){
-
+//if(!(winScreen.TimerDone()))
 for(int i=0;i<ballons.size();i++){
-ballons[i]->update();
+//if(!(winScreen.TimerDone()))
 ballons[i]->draw();
-
-if(ballons[i]->isClicked&&ballons[i]->isVisible){
-PlaySound(popSound);
-ballons[i]->isVisible=false;//make them unvisible after sound pop activate
-}
-
 
 }
 
@@ -129,18 +165,29 @@ winScreen.UpdateTimer();
 }
 
 void clearScreen(){
+//    UnloadSound(popSound);     // Unload sound data
+//
+// UnloadSound(yeaySound);
+//    CloseAudioDevice();     // Close audio device
+////    for(int i=0;i<ballons.size();i++){
+////		delete ballons[i];
+////	}
+//
+//	ballons.clear();
+
+}
+
+~WinScreen(){
     UnloadSound(popSound);     // Unload sound data
 
  UnloadSound(yeaySound);
     CloseAudioDevice();     // Close audio device
-    for(int i=0;i<ballons.size();i++){
-		delete ballons[i];
-	}
+//    for(int i=0;i<ballons.size();i++){
+//		delete ballons[i];
+//	}
 
 	ballons.clear();
-
 }
-
 
 };
 

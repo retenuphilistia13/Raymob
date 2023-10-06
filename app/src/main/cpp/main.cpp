@@ -61,8 +61,8 @@ win_screen=new WinScreen();
 
         		win=true;
 
-        		std::cout<<"you win";
-        		  win_screen->setTimer((float)5.0f+level*1.1f);
+//        		std::cout<<"you win";
+        		  win_screen->setTimer((float)6.0f+level*1.2f);
 
 
         		win_screen->creatBallon();
@@ -71,7 +71,9 @@ win_screen->isActivate=true;
 
 //display win screen till timer end
 if(!win_screen->isWinDone()&&win){
+win_screen->update();
 win_screen->show();
+
 // cout<<"update("<<endl;
 }
 
@@ -79,15 +81,15 @@ win_screen->show();
 if(win_screen->isWinDone()&&win){
 	win=false;
 
-win_screen->clearScreen();
-delete win_screen;
+//win_screen->clearScreen();
+
 int size=CardManager::max;
 	if(level<size){//may be a proplem but now not
-	level++;}else{
+	level++;}else{//reset
 	level=3;
 	}
 	cardGame=new CardManager(level);
-
+delete win_screen;//dekete win screen
 
 }
 
